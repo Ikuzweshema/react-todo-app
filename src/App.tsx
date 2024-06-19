@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TodoForm from "./components/todo-form";
 import { useContext, useEffect, useState } from "react";
 import ListItem from "./components/list-item";
-import { FaNoteSticky, FaSun, FaTrashCan, FaXmark } from "react-icons/fa6";
+import { FaNoteSticky, FaSun, FaTrashCan } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import { Card, IconButton } from "@mui/material";
 import { ThemeContext } from "./components/context/themeContext";
