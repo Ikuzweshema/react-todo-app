@@ -1,5 +1,5 @@
 import { FaTrashCan } from "react-icons/fa6";
-import { Checkbox, Button, Card } from "@mui/material";
+import { Checkbox, Button } from "@mui/material";
 import { useContext } from "react";
 import { ThemeContext } from "./context/themeContext";
 
@@ -8,24 +8,32 @@ type ListItemProps = {
   title: string;
   completed: boolean;
   onDelete(id: string): void;
-  toogle(id: string): void;
+  toggle(id: string): void;
 };
+
 export default function ListItem({
   title,
   completed,
   id,
   onDelete,
-  toogle,
+  toggle,
 }: ListItemProps) {
-  const { darkTheme } = useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext);
+  
+  if (!themeContext) {
+    throw new Error("ThemeContext must be used within a ThemeProvider");
+  }
+
+  const { darkTheme } = themeContext;
+
   return (
     <li
-      className={`${darkTheme && "bg"} list-group ${!darkTheme && "list-group-item"} p-1 m-2`}
+      className={`${darkTheme ? "bg" : ""} list-group ${!darkTheme ? "list-group-item" : ""} p-1 m-2`}
     >
-      <div className=" d-flex justify-content-between">
-        <Checkbox onChange={() => toogle(id)} checked={completed} />
+      <div className="d-flex justify-content-between">
+        <Checkbox onChange={() => toggle(id)} checked={completed} />
         <span
-          className={` ${darkTheme && "text-light"}  ${completed && "text-decoration-line-through"} `}
+          className={`${darkTheme ? "text-light" : ""} ${completed ? "text-decoration-line-through" : ""}`}
         >
           {title}
         </span>

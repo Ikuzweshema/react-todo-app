@@ -1,20 +1,26 @@
-import { FaNoteSticky } from "react-icons/fa6";
+import { FaNoteSticky, FaCircle } from "react-icons/fa6";
 import { TextField, Button } from "@mui/material";
-import { FaPlusCircle } from "react-icons/fa";
 import { ThemeContext } from "./context/themeContext";
-import { useContext } from "react";
-type formProps = {
-  submit(): void;
-  change(): void;
+import { useContext, ChangeEvent, FormEvent } from "react";
+
+type FormProps = {
+  submit(event: FormEvent): void;
+  change(event: ChangeEvent<HTMLInputElement>): void;
   text: string;
 };
-export default function TodoForm({ submit, change, text }: formProps) {
-  const { darkTheme } = useContext(ThemeContext);
+
+export default function TodoForm({ submit, change, text }: FormProps) {
+  const themeContext = useContext(ThemeContext);
+  
+  if (!themeContext) {
+    throw new Error("ThemeContext must be used within a ThemeProvider");
+  }
+
+  const { darkTheme } = themeContext;
+
   return (
     <form onSubmit={submit}>
-      <span
-        className={` text-center accordion mb-3 ${darkTheme && " text-light"} `}
-      >
+      <span className={`text-center accordion mb-3 ${darkTheme ? "text-light" : ""}`}>
         <center>
           <FaNoteSticky /> Add Notes
         </center>
@@ -24,16 +30,16 @@ export default function TodoForm({ submit, change, text }: formProps) {
         label="Note title"
         onChange={change}
         value={text}
-        className=" w-100 mt-3 "
-        sx={{ backgroundColor:" white"}}
+        className="w-100 mt-3"
+        sx={{ backgroundColor: "white" }}
       />
 
       <center>
         <Button
           variant="contained"
-          type=" submit"
-          startIcon={<FaPlusCircle />}
-          className=" mt-2"
+          type="submit"
+          startIcon={<FaCircle />}
+          className="mt-2"
         >
           ADD
         </Button>
