@@ -12,7 +12,7 @@ type Note = {
   id: string;
   completed: boolean;
   title: string;
-};
+}
 
 function App() {
   const { darkTheme, toggleTheme } = useContext(ThemeContext);
