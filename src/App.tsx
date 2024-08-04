@@ -12,10 +12,10 @@ type Note = {
   id: string;
   completed: boolean;
   title: string;
-}
+};
 
 function App() {
-  const { darkTheme, toggleTheme } = useContext(ThemeContext);
+  const { darkTheme, toogleTheme } = useContext(ThemeContext);
 
   const [notes, setNotes] = useState<Note[]>(() => {
     const value = localStorage.getItem("notes");
@@ -86,7 +86,7 @@ function App() {
         </center>
         <span>
           <IconButton
-            onClick={toggleTheme}
+            onClick={toogleTheme}
             className={darkTheme ? "text-light" : ""}
             size="small"
           >
