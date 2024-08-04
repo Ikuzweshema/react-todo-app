@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { Card, IconButton } from "@mui/material";
 import { ThemeContext } from "./components/context/themeContext";
 
-export type Note = {
+type Note = {
   id: string;
   completed: boolean;
   title: string;
