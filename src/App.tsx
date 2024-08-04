@@ -72,7 +72,11 @@ function App() {
   }
 
   return (
-    <div className={`h-full container-fluid justify-content-center align-items-center ${darkTheme ? "bg" : ""}`}>
+    <div
+      className={`h-full container-fluid justify-content-center align-items-center ${
+        darkTheme ? "bg" : ""
+      }`}
+    >
       <div className="d-flex justify-content-evenly align-content-center w-100">
         <center className="mt-5 mb-5">
           <span className={`${darkTheme ? "text-light" : ""} header`}>
@@ -92,11 +96,23 @@ function App() {
       </div>
 
       <div className="row col-sm-10 d-flex gap-2">
-        <Card className={`container ${!darkTheme ? "border" : ""} col-sm-5 p-5 me-1 rounded ${darkTheme ? "bg-black" : ""}`}>
+        <Card
+          className={`container ${
+            !darkTheme ? "border" : ""
+          } col-sm-5 p-5 me-1 rounded ${darkTheme ? "bg-black" : ""}`}
+        >
           <TodoForm text={text} change={handleChange} submit={handleSubmit} />
         </Card>
-        <Card className={`d-flex flex-column col-sm-5 ${!darkTheme ? "border" : ""} p-5 gap-2 rounded ${darkTheme ? "bg-black" : ""}`}>
-          <span className={`text-center accordion mb-2 ${darkTheme ? "text-light" : ""}`}>
+        <Card
+          className={`d-flex flex-column col-sm-5 ${
+            !darkTheme ? "border" : ""
+          } p-5 gap-2 rounded ${darkTheme ? "bg-black" : ""}`}
+        >
+          <span
+            className={`text-center accordion mb-2 ${
+              darkTheme ? "text-light" : ""
+            }`}
+          >
             <FaNoteSticky /> <span>Notes </span>
             <span className="badge bg-primary">{notes.length}</span>
           </span>
