@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { Card, IconButton } from "@mui/material";
 import { ThemeContext } from "./components/context/themeContext";
 
-type Note = {
+type Todo = {
   id: string;
   completed: boolean;
   title: string;
@@ -17,7 +17,7 @@ type Note = {
 function App() {
   const { darkTheme, toogleTheme } = useContext(ThemeContext);
 
-  const [notes, setNotes] = useState<Note[]>(() => {
+  const [notes, setNotes] = useState<Todo[]>(() => {
     const value = localStorage.getItem("notes");
     return value ? JSON.parse(value) : [];
   });
@@ -65,7 +65,7 @@ function App() {
 
   function toggleNote(id: string) {
     setNotes((prevNotes) =>
-      prevNotes.map((note) =>
+      prevNotes.map((note: Todo) =>
         note.id === id ? { ...note, completed: !note.completed } : note
       )
     );
@@ -73,9 +73,8 @@ function App() {
 
   return (
     <div
-      className={`h-full container-fluid justify-content-center align-items-center ${
-        darkTheme ? "bg" : ""
-      }`}
+      className={`h-full container-fluid justify-content-center align-items-center ${darkTheme ? "bg" : ""
+        }`}
     >
       <div className="d-flex justify-content-evenly align-content-center w-100">
         <center className="mt-5 mb-5">
@@ -97,21 +96,18 @@ function App() {
 
       <div className="row col-sm-10 d-flex gap-2">
         <Card
-          className={`container ${
-            !darkTheme ? "border" : ""
-          } col-sm-5 p-5 me-1 rounded ${darkTheme ? "bg-black" : ""}`}
+          className={`container ${!darkTheme ? "border" : ""
+            } col-sm-5 p-5 me-1 rounded ${darkTheme ? "bg-black" : ""}`}
         >
           <TodoForm text={text} change={handleChange} submit={handleSubmit} />
         </Card>
         <Card
-          className={`d-flex flex-column col-sm-5 ${
-            !darkTheme ? "border" : ""
-          } p-5 gap-2 rounded ${darkTheme ? "bg-black" : ""}`}
+          className={`d-flex flex-column col-sm-5 ${!darkTheme ? "border" : ""
+            } p-5 gap-2 rounded ${darkTheme ? "bg-black" : ""}`}
         >
           <span
-            className={`text-center accordion mb-2 ${
-              darkTheme ? "text-light" : ""
-            }`}
+            className={`text-center accordion mb-2 ${darkTheme ? "text-light" : ""
+              }`}
           >
             <FaNoteSticky /> <span>Notes </span>
             <span className="badge bg-primary">{notes.length}</span>
@@ -132,7 +128,7 @@ function App() {
                 No Notes available
               </li>
             ) : (
-              notes.map((note) => (
+              notes.map((note: Todo) => (
                 <ListItem
                   key={note.id}
                   id={note.id}
