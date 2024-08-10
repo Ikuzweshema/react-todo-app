@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useState, FC } from "react";
 
-
 interface ThemeContextType {
   darkTheme: boolean;
   toggleTheme: () => void;
