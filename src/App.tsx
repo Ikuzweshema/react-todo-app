@@ -9,7 +9,7 @@ import { Card, IconButton } from "@mui/material";
 import { ThemeContext } from "./components/context/themeContext";
 
 export default function App() {
-  const { darkTheme, toogleTheme } = useContext(ThemeContext);
+  const { toogleTheme, darkTheme } = useContext(ThemeContext);
 
   const [notes, setNotes] = useState(() => {
     const value = localStorage.getItem("notes");
@@ -21,6 +21,10 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
+  useEffect(() => {
+    console.log(darkTheme);
+
+  }, [darkTheme])
 
   function handleChange(e) {
     setText(e.target.value);
@@ -75,7 +79,7 @@ export default function App() {
         <center className="mt-5 mb-5">
           <span className={`${darkTheme ? "text-light" : ""} header`}>
             <FaNoteSticky />
-            <span> Stick Notes</span>
+            <span>Todo App</span>
           </span>
         </center>
         <span>
@@ -104,7 +108,7 @@ export default function App() {
             className={`text-center accordion mb-2 ${darkTheme ? "text-light" : ""
               }`}
           >
-            <FaNoteSticky /> <span>Notes </span>
+            <FaNoteSticky /> <span>Todos </span>
             <span className="badge bg-primary">{notes.length}</span>
           </span>
           {notes.length !== 0 && (
@@ -120,7 +124,7 @@ export default function App() {
           <ul className="list-group flex-column">
             {notes.length === 0 ? (
               <li className={`list-group-item ${darkTheme ? "text-light" : ""}`}>
-                No Notes available
+                No Todos available
               </li>
             ) : (
               notes.map((note) => (
