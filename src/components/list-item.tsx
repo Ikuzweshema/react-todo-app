@@ -3,13 +3,6 @@ import { Checkbox, Button } from "@mui/material";
 import { useContext } from "react";
 import { ThemeContext } from "./context/themeContext";
 
-type ListItemProps = {
-  id: string;
-  title: string;
-  completed: boolean;
-  onDelete(id: string): void;
-  toggle(id: string): void;
-};
 
 export default function ListItem({
   title,
@@ -17,13 +10,9 @@ export default function ListItem({
   id,
   onDelete,
   toggle,
-}: ListItemProps) {
-  const themeContext = useContext(ThemeContext);
-  
-  if (!themeContext) {
-    throw new Error("ThemeContext must be used within a ThemeProvider");
-  }
+}) {
 
+  const themeContext = useContext(ThemeContext);
   const { darkTheme } = themeContext;
 
   return (

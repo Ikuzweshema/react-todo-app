@@ -8,16 +8,10 @@ import toast from "react-hot-toast";
 import { Card, IconButton } from "@mui/material";
 import { ThemeContext } from "./components/context/themeContext";
 
-type Todo = {
-  id: string;
-  completed: boolean;
-  title: string;
-};
-
-function App() {
+export default function App() {
   const { darkTheme, toogleTheme } = useContext(ThemeContext);
 
-  const [notes, setNotes] = useState<Todo[]>(() => {
+  const [notes, setNotes] = useState(() => {
     const value = localStorage.getItem("notes");
     return value ? JSON.parse(value) : [];
   });
@@ -28,7 +22,7 @@ function App() {
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleChange(e) {
     setText(e.target.value);
   }
 
@@ -39,10 +33,10 @@ function App() {
     ]);
   }
 
-  function handleSubmit(e: FormEvent) {
+  function handleSubmit(e) {
     e.preventDefault();
     toast.promise(
-      new Promise<void>((resolve) => {
+      new Promise((resolve) => {
         addNote();
         resolve();
       }),
@@ -58,18 +52,19 @@ function App() {
     setText("");
   }
 
-  function handleDelete(id: string) {
+  function handleDelete(id) {
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
     toast.success("Note deleted");
   }
 
-  function toggleNote(id: string) {
+  function toggleNote(id) {
     setNotes((prevNotes) =>
-      prevNotes.map((note: Todo) =>
+      prevNotes.map((note) =>
         note.id === id ? { ...note, completed: !note.completed } : note
       )
     );
   }
+
 
   return (
     <div
@@ -128,7 +123,7 @@ function App() {
                 No Notes available
               </li>
             ) : (
-              notes.map((note: Todo) => (
+              notes.map((note) => (
                 <ListItem
                   key={note.id}
                   id={note.id}
@@ -143,7 +138,5 @@ function App() {
         </Card>
       </div>
     </div>
-  );
+  )
 }
-
-export default App;

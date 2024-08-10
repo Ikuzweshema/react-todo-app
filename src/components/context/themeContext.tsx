@@ -1,28 +1,17 @@
-import { createContext, ReactNode, useState, FC } from "react";
+import { createContext,useState} from "react";
+const ThemeContext = createContext(undefined);
 
-interface ThemeContextType {
-  darkTheme: boolean;
-  toggleTheme: () => void;
-}
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-interface ThemeProviderProps {
-  children: ReactNode;
-}
-
-const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
+function ThemeProvider({ children }) {
   const [darkTheme, setDarkTheme] = useState(false);
 
   function toggleTheme() {
     setDarkTheme(!darkTheme);
   }
-
   return (
     <ThemeContext.Provider value={{ darkTheme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
-};
-
-export default ThemeProvider;
+}
+export { ThemeProvider, ThemeContext }
