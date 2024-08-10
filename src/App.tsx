@@ -9,7 +9,7 @@ import { Card, IconButton } from "@mui/material";
 import { ThemeContext } from "./components/context/themeContext";
 
 export default function App() {
-  const { toogleTheme, darkTheme } = useContext(ThemeContext);
+  const { toggleTheme, darkTheme } = useContext(ThemeContext);
 
   const [notes, setNotes] = useState(() => {
     const value = localStorage.getItem("notes");
@@ -84,7 +84,7 @@ export default function App() {
         </center>
         <span>
           <IconButton
-            onClick={toogleTheme}
+            onClick={toggleTheme}
             className={darkTheme ? "text-light" : ""}
             size="small"
           >
