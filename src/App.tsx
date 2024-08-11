@@ -7,6 +7,8 @@ import { FaNoteSticky, FaSun, FaTrashCan, FaMoon } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import { Card, IconButton } from "@mui/material";
 import { ThemeContext } from "./components/context/themeContext";
+import Loading from "./components/loading";
+
 
 export default function App() {
   const { toggleTheme, darkTheme } = useContext(ThemeContext);
@@ -18,13 +20,19 @@ export default function App() {
 
   const [text, setText] = useState("");
 
-  useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes));
-  }, [notes]);
-  useEffect(() => {
-    console.log(darkTheme);
+  const [isLoading, setIsLoading] = useState(true);
 
-  }, [darkTheme])
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   function handleChange(e) {
     setText(e.target.value);
@@ -46,7 +54,7 @@ export default function App() {
       }),
       {
         loading: "Adding note...",
-        success: <span>{`${text} added`}</span>,
+        success: <span>{`${text} Added!`}</span>,
         error: <span>Failed to add note</span>,
       },
       {
@@ -58,7 +66,7 @@ export default function App() {
 
   function handleDelete(id) {
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
-    toast.success("Note deleted");
+    toast.success("Todo  Deleted!");
   }
 
   function toggleNote(id) {
@@ -78,18 +86,18 @@ export default function App() {
       <div className="d-flex justify-content-evenly align-content-center w-100">
         <center className="mt-5 mb-5">
           <span className={`${darkTheme ? "text-light" : ""} header`}>
-            <img src="/icon.png" alt="logo"  style={{width:200}} />
+            <img src="/icon.png" alt="logo" style={{ width: 200 }} />
             <span>TODO APP</span>
           </span>
         </center>
         <span>
-          <IconButton
+          <button
             onClick={toggleTheme}
-            className={darkTheme ? "text-light" : ""}
-            size="small"
+            className={darkTheme ? "text-light btn" : "btn"}
+
           >
             {darkTheme ? <FaSun /> : <FaMoon />}
-          </IconButton>
+          </button>
         </span>
       </div>
 

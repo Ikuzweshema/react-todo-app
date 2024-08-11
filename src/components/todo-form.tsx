@@ -1,7 +1,8 @@
-import { FaNoteSticky, FaCircle } from "react-icons/fa6";
+import { FaNoteSticky, FaPlus } from "react-icons/fa6";
 import { TextField, Button } from "@mui/material";
 import { ThemeContext } from "./context/themeContext";
 import { useContext } from "react";
+
 
 
 export default function TodoForm({ submit, change, text }) {
@@ -17,7 +18,7 @@ export default function TodoForm({ submit, change, text }) {
         </span>
   
         <TextField
-          label="Note title"
+          label="Todo title"
           onChange={change}
           value={text}
           className="w-100 mt-3"
@@ -28,10 +29,10 @@ export default function TodoForm({ submit, change, text }) {
           <Button
             variant="contained"
             type="submit"
-            startIcon={<FaCircle />}
+            startIcon={<FaPlus/>} 
             className="mt-2"
           >
-            ADD
+            Add Todo
           </Button>
         </center>
       </form>
