@@ -78,8 +78,8 @@ export default function App() {
       <div className="d-flex justify-content-evenly align-content-center w-100">
         <center className="mt-5 mb-5">
           <span className={`${darkTheme ? "text-light" : ""} header`}>
-            <FaNoteSticky />
-            <span>Todo App</span>
+            <img src="/icon.png" alt="logo"  style={{width:200}} />
+            <span>TODO APP</span>
           </span>
         </center>
         <span>
