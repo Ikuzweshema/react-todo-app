@@ -21,7 +21,10 @@ export default function App() {
   const [text, setText] = useState("");
 
   const [isLoading, setIsLoading] = useState(true);
-
+   useEffect(()=>{
+     window.localStorage.setItem("notes",JSON.stringfy(notes))
+   },[notes])
+   
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
