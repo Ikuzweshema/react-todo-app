@@ -17,13 +17,13 @@ export default function App() {
     const value = localStorage.getItem("notes");
     return value ? JSON.parse(value) : [];
   });
-
+  useEffect(()=>{
+    window.localStorage.setItem("notes",JSON.stringify(notes))
+  },[notes])
   const [text, setText] = useState("");
 
   const [isLoading, setIsLoading] = useState(true);
-   useEffect(()=>{
-     window.localStorage.setItem("notes",JSON.stringfy(notes))
-   },[notes])
+
    
   useEffect(() => {
     const timer = setTimeout(() => {
